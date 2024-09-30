@@ -41,8 +41,8 @@ function ctrl_c(){
 trap ctrl_c INT
 sleep 1
 
-ruta="$(pwd)"
-folder="$ruta"
+route="$(pwd)"
+folder="$route"
 
 for file in "$folder"/*.jpg; do
     if [ -f "$file" ]; then
