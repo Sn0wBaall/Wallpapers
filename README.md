@@ -16,6 +16,6 @@ The file "browser.sh" is a browser, if you execute this script you can search fo
 
 ![Alt text](Images/image2.png)
 
-This is the view of when the scrip shows you the image
+This is the view of when the scrip shows you the image.
 
 ![Alt text](Images/image3.png)
