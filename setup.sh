@@ -34,6 +34,19 @@ if [ ! -d /home/$user/Desktop ];then
   echo -e "${BgreenColour}[+]${endColour}${grayColour} Desktop directory has been create${endColour}"
   echo -e \n"${ByellowColour}[!]${endColour}${grayColour} Pleae execute${endColour}${BpurpleColour} ./setup.sh${endColour}${grayColour} again${endColour}"
 else
+  if [ $(which kitty) ];then
 cp -r $route/Wallpapers /home/$user/Desktop/
 echo -e "\n${BgreenColour}[+]${endColour}${grayColour} All wallpapers are in${endColour}${BpurpleColour} /home/$user/Desktop/Wallpapers${endColour}"
+  else
+    clear
+    echo -e "\n${ByellowColour}[!]${endColour}${grayColour} You don't have kitty${endColour}\n"
+    echo -ne "${BgreenColour}[+]${endColour}${grayColour} Pleae enter your root password to install it${endColour}${turquoiseColour} --> ${endColour}"
+    read -s passwd
+    echo -e ""
+    echo -e "${ByellowColour}[!]${endColour}${grayColour} installing kitty${endColour}\n"
+    echo "$passwd" | sudo -S apt install kitty -y >/dev/null 2>/dev/null
+    echo -e "${BgreenColour}[+]${endColour}${grayColour} Kitty is already installed!!!${endColour}"
+    sleep 2
+    ./setup.sh
+  fi
 fi

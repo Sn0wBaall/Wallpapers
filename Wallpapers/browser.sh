@@ -50,14 +50,10 @@ for file in "$folder"/*.jpg; do
     fi
   done
 
-if ! type kitty &> /dev/null; then
-  echo -ne "\n${redColour}[!]${endColour}${grayColour} You don't have kitty, let's install it!!!${endColour}\n"
-  echo -ne "\n${yellowColour}[!]${endColour}${grayColour} Please enter the root password${endColour}${turquoiseColour} -->${endColour} "
-  read -s passwd
-  echo ""
-  echo -e "${yellowColour}[!]${endColour}${grayColour} Instaling kitty${endColour}"
-  echo "$passwd" | sudo -S apt install kitty -y >/dev/null 2>/dev/null
-  echo -e "${greenColour}[+]${endColour}${grayColour} The kitty is already installed${endColour}"
+term=$(echo -e $TERM | sed "s/-/ /" | awk '{print $NF}')
+
+if [ "$term" != "kitty" ];then
+  echo -e "${ByellowColour}[!] Please execute the script in a kitty terminal!!!${endColour}"
 else
   echo -e "\n${greenColour}[+]${endColour}${grayColour} You have${endColour}${BpurpleColour} $jpg_count${endColour}${grayColour} wallpapers${endColour}"
   while true; do
