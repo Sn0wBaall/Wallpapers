@@ -41,6 +41,9 @@ function ctrl_c(){
 trap ctrl_c INT
 sleep 1
 
+
+term=$(echo -e $TERM | sed "s/-/ /" | awk '{print $NF}')
+
 route="$(pwd)"
 folder="$route/WP"
 
@@ -50,25 +53,29 @@ for file in "$folder"/*.jpg; do
     fi
   done
 
-term=$(echo -e $TERM | sed "s/-/ /" | awk '{print $NF}')
-
 if [ "$term" != "kitty" ];then
   echo -e "${ByellowColour}[!] Please execute the script in a kitty terminal!!!${endColour}"
 else
   echo -e "\n${greenColour}[+]${endColour}${grayColour} You have${endColour}${BpurpleColour} $jpg_count${endColour}${grayColour} wallpapers${endColour}"
   while true; do
 
-  echo -ne "\n${yellowColour}[!]${endColour}${grayColour} Do you want to see all wallpapers, a specific wallpaper or specify a range?${endColour} ${purpleColour}[A]ll${endColour} ${blueColour}[S]pecific${endColour} ${greenColour}[R]ange${endcolour} ${redColour}[e]xit${endColour}${turquoiseColour} -->${endColour} " && read option 
+  echo -ne "\n${yellowColour}[!]${endColour}${grayColour} Do you want to see all wallpapers, a specific wallpaper or specify a range?${endColour} ${purpleColour}[A]ll${endColour} ${blueColour}[S]pecific${endColour} ${greenColour}[R]ange${endcolour} ${redColour}[e]xit${endColour}${turquoiseColour} -->${endColour} " & read option 
 
   if [ "$option" == "e" ]; then
     exit 1
 
   elif [ "$option" == "S" ]; then
     while true; do 
-      echo -ne "\n${yellowColour}[!]${endColour}${grayColour} Which wallpaper do you want to see?${endColour}${purpleColour} [ 01-$jpg_count ]${endColour}${turquoiseColour} -->${endColour} " && read num
+      echo -e "\n${BgreenColour}[+]${endColour}${grayColour} Type${endColour}${BblueColour} \"M\"${endColour}${grayColour} to return to the menu${endColour}"
+      echo -ne "${yellowColour}[!]${endColour}${grayColour} Which wallpaper do you want to see?${endColour}${purpleColour} [ 01-$jpg_count ]${endColour}${turquoiseColour} -->${endColour} " & read num
+      if [ "$num" == "M" ];then
+        clear
+        break
+      else
       num=$(printf %02d "$num")
-      kitten icat $folder/wall-$num.jpg
-   done
+      kitten icat $folder/wall-$num.jpg 2>/dev/null
+    fi  
+    done
 
 
   elif [ "$option" == "A" ];then
@@ -83,16 +90,24 @@ else
     done
 
   elif [ "$option" == "R" ]; then
-    echo -ne "\n${yellowColour}[!]${endColour}${grayColour} Specify a range${endColour}${purpleColour} [ 01-$jpg_count ]${endColour}${turquoiseColour} -->${endColour} " && read read1 read2 
-    for ((i = $read1; i <= $read2; i++)); do
-      tput civis
-      num=$(echo $i | awk '{printf "%02d", $1}')
-      file="$folder/wall-$num.jpg"
-      wallpaper=$(echo -e $file | sed 's/\// /g' | awk '{print $NF}')
-      echo -e "\n${greenColour}[+]${endColour}${grayColour} Showing the wallpaper${endColour}${turquoiseColour} -->${endColour}${purpleColour} $wallpaper${endColour}"
-      sleep 0.5
-      kitten icat $file
-      tput cnorm
+    while true; do 
+      echo -e "\n${BgreenColour}[+]${endColour}${grayColour} Type${endColour}${BblueColour} \"M\"${endColour}${grayColour} to return to the menu${endColour}"
+      echo -ne "${yellowColour}[!]${endColour}${grayColour} Specify a range${endColour}${purpleColour} [ 01-$jpg_count ]${endColour}${turquoiseColour} -->${endColour} " && read read1 read2
+      if [ "$read1" == "M" ];then
+        clear
+        break
+      else
+        for ((i = $read1; i <= $read2; i++)); do
+          tput civis
+          num=$(echo $i | awk '{printf "%02d", $1}')
+          file="$folder/wall-$num.jpg"
+          wallpaper=$(echo -e $file | sed 's/\// /g' | awk '{print $NF}')
+          echo -e "\n${greenColour}[+]${endColour}${grayColour} Showing the wallpaper${endColour}${turquoiseColour} -->${endColour}${purpleColour} $wallpaper${endColour}"
+          sleep 0.5
+          kitten icat $file 
+          tput cnorm
+      done
+      fi
     done
   fi
 done
