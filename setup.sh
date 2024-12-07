@@ -31,8 +31,8 @@ if [ ! -d /home/$user/Desktop ];then
   echo -e "${ByellowColour}[+]${endColour}${grayColour} Creating a Desktop directory${endColour}"
   mkdir /home/$user/Desktop
   sleep 0.5
-  echo -e "${BgreenColour}[+]${endColour}${grayColour} Desktop directory has been create${endColour}"
-  echo -e \n"${ByellowColour}[!]${endColour}${grayColour} Pleae execute${endColour}${BpurpleColour} ./setup.sh${endColour}${grayColour} again${endColour}"
+  echo -e "${BgreenColour}[+]${endColour}${grayColour} Desktop directory has been created${endColour}"
+  echo -e \n"${ByellowColour}[!]${endColour}${grayColour} Please execute${endColour}${BpurpleColour} ./setup.sh${endColour}${grayColour} again${endColour}"
 else
   if [ $(which kitty) ];then
 cp -r $route/Wallpapers /home/$user/Desktop/
