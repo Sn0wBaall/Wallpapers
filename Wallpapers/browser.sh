@@ -39,8 +39,6 @@ function ctrl_c(){
 }
 
 trap ctrl_c INT
-sleep 1
-
 
 term=$(echo -e $TERM | sed "s/-/ /" | awk '{print $NF}')
 
@@ -76,7 +74,6 @@ else
       kitten icat $folder/wall-$num.jpg 2>/dev/null
     fi  
     done
-
 
   elif [ "$option" == "A" ];then
     echo -e "\n${yellowColour}[!]${endColour}${grayColour} Showing all wallpapers${endColour}"
