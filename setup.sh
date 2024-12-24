@@ -40,7 +40,7 @@ echo -e "\n${BgreenColour}[+]${endColour}${grayColour} All wallpapers are in${en
   else
     clear
     echo -e "\n${ByellowColour}[!]${endColour}${grayColour} You don't have kitty${endColour}\n"
-    echo -ne "${BgreenColour}[+]${endColour}${grayColour} Pleae enter your root password to install it${endColour}${turquoiseColour} --> ${endColour}"
+    echo -ne "${BgreenColour}[+]${endColour}${grayColour} Please enter your root password to install it${endColour}${turquoiseColour} --> ${endColour}"
     read -s passwd
     echo -e ""
     echo -e "${ByellowColour}[!]${endColour}${grayColour} installing kitty${endColour}\n"
