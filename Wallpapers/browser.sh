@@ -57,7 +57,7 @@ else
   echo -e "\n${greenColour}[+]${endColour}${grayColour} You have${endColour}${BpurpleColour} $jpg_count${endColour}${grayColour} wallpapers${endColour}"
   while true; do
 
-  echo -ne "\n${yellowColour}[!]${endColour}${grayColour} Do you want to see all wallpapers, a specific wallpaper or specify a range?${endColour} ${purpleColour}[A]ll${endColour} ${blueColour}[S]pecific${endColour} ${greenColour}[R]ange${endcolour} ${redColour}[e]xit${endColour}${turquoiseColour} -->${endColour} " & read option 
+  echo -ne "\n${yellowColour}[!]${endColour}${grayColour} Do you want to see all wallpapers, a specific wallpaper or specify a range?${endColour} ${purpleColour}[A]ll${endColour} ${blueColour}[S]pecific${endColour} ${greenColour}[R]ange${endcolour} ${redColour}[e]xit${endColour}${turquoiseColour} -->${endColour} " && read option 
 
   if [ "$option" == "e" ]; then
     exit 1
@@ -65,7 +65,7 @@ else
   elif [ "$option" == "S" ]; then
     while true; do 
       echo -e "\n${BgreenColour}[+]${endColour}${grayColour} Type${endColour}${BblueColour} \"M\"${endColour}${grayColour} to return to the menu${endColour}"
-      echo -ne "${yellowColour}[!]${endColour}${grayColour} Which wallpaper do you want to see?${endColour}${purpleColour} [ 01-$jpg_count ]${endColour}${turquoiseColour} -->${endColour} " & read num
+      echo -ne "${yellowColour}[!]${endColour}${grayColour} Which wallpaper do you want to see?${endColour}${purpleColour} [ 01-$jpg_count ]${endColour}${turquoiseColour} -->${endColour} " && read num
       if [ "$num" == "M" ];then
         clear
         break
