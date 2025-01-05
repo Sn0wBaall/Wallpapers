@@ -26,13 +26,13 @@ route=$(pwd)
 user=$(whoami)
 
 if [ ! -d /home/$user/Desktop ];then
-  echo -e \n"${BredColour}[!]${endColour}${grayColour} You dont have a Desktop directory${endColour}"
+  echo -e "\n${BredColour}[!]${endColour}${grayColour} You dont have a Desktop directory${endColour}"
   sleep 1
   echo -e "${ByellowColour}[+]${endColour}${grayColour} Creating a Desktop directory${endColour}"
   mkdir /home/$user/Desktop
   sleep 0.5
   echo -e "${BgreenColour}[+]${endColour}${grayColour} Desktop directory has been created${endColour}"
-  echo -e \n"${ByellowColour}[!]${endColour}${grayColour} Please execute${endColour}${BpurpleColour} ./setup.sh${endColour}${grayColour} again${endColour}"
+  echo -e "\n${ByellowColour}[!]${endColour}${grayColour} Please execute${endColour}${BpurpleColour} ./setup.sh${endColour}${grayColour} again${endColour}"
 else
   if [ $(which kitty) ];then
 cp -r $route/Wallpapers /home/$user/Desktop/
