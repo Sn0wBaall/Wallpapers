@@ -1,6 +1,7 @@
-WALLPAPERS
 
-This repository takes wallpapers from [Ghost1nTh3SSH](https://github.com/Ghost1nTh3SSH/dotfiles), and other wallpapers from this page https://wallpapercave.com.
+This repository takes wallpapers from [gh0stzk](https://github.com/gh0stzk/dotfiles), and other wallpapers from this page https://wallpapercave.com.
+
+---
 ## Installation
 
 ``` 
