@@ -40,9 +40,9 @@ function ctrl_c(){
 
 trap ctrl_c INT
 
-term=$(echo -e $TERM | sed "s/-/ /" | awk '{print $NF}')
+term=$(echo $TERM | awk '{print $NF}' FS='-' )
 
-route="$(pwd)"
+route="$(pwd)" 
 folder="$route/WP"
 
 for file in "$folder"/*.jpg; do
