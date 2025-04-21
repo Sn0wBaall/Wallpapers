@@ -35,6 +35,7 @@ echo -e "${purpleColour}
                                                                                                                         
 
 function ctrl_c(){
+  echo -e "\n\n${BredColour}[!] Exit...${endColour}\n"
   tput cnorm && exit 1
 }
 
