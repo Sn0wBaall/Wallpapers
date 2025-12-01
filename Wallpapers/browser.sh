@@ -22,91 +22,105 @@ BpurpleColour="\e[1;35m"
 BturquoiseColour="\e[1;36m"
 BgrayColour="\e[1;37m"
 
-clear
-echo -e "${purpleColour}
- ░▒▓███████▓▒░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░        
-░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░        
-░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░  ${endColour}${redColour}[ By Sn0wBaall ]${endColour}${purpleColour}
- ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░      ░▒▓█▓▒░        
-       ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░        
-       ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░        
-░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓█████████████▓▒░ ░▒▓█████████████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓████████▓▒░ 
-                                                                                                                        ${endColour}"
-                                                                                                                        
+route="$(pwd)"
+folder="$route/WP"
+jpg_count=0
 
 function ctrl_c(){
-  echo -e "\n\n${BredColour}[!] Exit...${endColour}\n"
+  echo -e "\n\n${BredColour}[!] Exit...${endColour}"
   tput cnorm && exit 1
 }
 
-trap ctrl_c INT
+trap ctrl_c SIGINT
 
-term=$(echo $TERM | awk '{print $NF}' FS='-' )
 
-route="$(pwd)" 
-folder="$route/WP"
-
-for file in "$folder"/*.jpg; do
-    if [ -f "$file" ]; then
-        let jpg_count+=1
+function jpgCount(){
+  for file in "$folder"/*.jpg;do
+    if  [ -f "$file" ];then
+      let jpg_count+=1
     fi
   done
 
-if [ "$term" != "kitty" ];then
-  echo -e "${ByellowColour}[!] Please execute the script in a kitty terminal!!!${endColour}"
-else
-  echo -e "\n${greenColour}[+]${endColour}${grayColour} You have${endColour}${BpurpleColour} $jpg_count${endColour}${grayColour} wallpapers${endColour}"
-  while true; do
+  echo -e "$jpg_count"
+}
 
-  echo -ne "\n${yellowColour}[!]${endColour}${grayColour} Do you want to see all wallpapers, a specific wallpaper or specify a range?${endColour} ${purpleColour}[A]ll${endColour} ${blueColour}[S]pecific${endColour} ${greenColour}[R]ange${endcolour} ${redColour}[e]xit${endColour}${turquoiseColour} -->${endColour} " && read option 
+function banner(){
+  echo -e "${purpleColour}"
+  echo -e " ░▒▓███████▓▒░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░   "     
+  echo -e "░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░   "      
+  echo -e "░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░  ${endColour}${BredColour}[ By Sn0wBaall ]${endColour}"
+  echo -e "${purpleColour} ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░      ░▒▓█▓▒░   "     
+  echo -e "       ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░        "
+  echo -e "       ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░        "
+  echo -e "░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓█████████████▓▒░ ░▒▓█████████████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓████████▓▒░ "
+  echo -e "${endColour}\n"
+                                                                                                                        
+}
 
-  if [ "$option" == "e" ]; then
-    exit 1
+function menu(){
+  while true;do
+    clear
+    banner
+    echo -e "${BgreenColour}[+]${endColour}${grayColour} You have ${endColour}${BpurpleColour}$(jpgCount)${endColour}${grayColour} wallpapers${endColour}\n"
+    echo -e "${BgreenColour}[~]${endColour}${grayColour} What do you want to see?${endColour}"
+    echo -e "\t${BpurpleColour}[A]${endColour}${purpleColour}ll${endColour}${grayColour} wallpapers${endColour}"
+    echo -e "\t${BblueColour}[S]${endColour}${blueColour}pecific${endColour}${grayColour} wallpaper${endColour}"
+    echo -e "\t${BgreenColour}[R]${endColour}${greenColour}ange${endColour}${grayColour} of wallpapers${endColour}"
+    echo -e "\t${BredColour}[e]${endColour}${redColour}xit${endColour}\n" 
+    echo -ne "${BgrayColour}[${endColour}${yellowColour} SN0WWALL${endColour}${BgrayColour} ]${endColour}${grayColour}:${endColour}${BgrayColour}\$${endColour} "
+    read -r option
+    case "$option" in
+      [A]) all;;
+      [S]) specific;;
+      [R]) range;;
+      [e]) exit 1;;
+    esac
+  done
+}
 
-  elif [ "$option" == "S" ]; then
-    while true; do 
-      echo -e "\n${BgreenColour}[+]${endColour}${grayColour} Type${endColour}${BblueColour} \"M\"${endColour}${grayColour} to return to the menu${endColour}"
-      echo -ne "${yellowColour}[!]${endColour}${grayColour} Which wallpaper do you want to see?${endColour}${purpleColour} [ 01-$jpg_count ]${endColour}${turquoiseColour} -->${endColour} " && read num
-      if [ "$num" == "M" ];then
-        clear
-        break
-      else
+function all(){
+  echo -e "${BgreenColour}[+]${endColour}${grayColour} Showing all wallpapers${endColour}"
+  sleep 1
+  tput civis
+  for file in $(ls -v $folder/wall-*.jpg);do
+    wallpaper=$(echo -e $file | sed 's/\// /g' | awk '{print $NF}')
+    echo -e "${BgrayColour}[${endColour}${yellowColour} Showing${endColour}${BpurpleColour} $wallpaper${endColour}${BgrayColour} ]${endColour}"
+    sleep 0.5
+    kitten icat "$file"
+  done
+  tput cnorm
+}
+
+function specific(){
+  while true;do
+    echo -e "${greenColour}┌${endColour}${BgrayColour}[${endColour}${yellowColour} type${endColour}${ByellowColour} \"M\"${endColour}${yellowColour} to return to the menu${endColour}${BgrayColour} ]${endColour}"
+    echo -ne "${greenColour}└${endColour}${BgrayColour}[${endColour}${BpurpleColour} 01-$(jpgCount)${endColour}${BgrayColour} ]${endColour}${grayColour}:${endColour}${BgrayColour}\$${endColour} " && read -r num
+    if [ "$num" == "M" ];then
+      menu
+    fi
       num=$(printf %02d "$num")
       kitten icat $folder/wall-$num.jpg 2>/dev/null
-    fi  
-    done
+  done
+}
 
-  elif [ "$option" == "A" ];then
-    echo -e "\n${yellowColour}[!]${endColour}${grayColour} Showing all wallpapers${endColour}"
-     for file in $(ls -v $folder/wall-*.jpg); do
-       tput civis
+function range(){
+  while true;do
+    echo -e "${greenColour}┌${endColour}${BgrayColour}[${endColour}${yellowColour} type${endColour}${ByellowColour} \"M\"${endColour}${yellowColour} to return to the menu${endColour}${BgrayColour} ]${endColour}"
+    echo -ne "${greenColour}└${endColour}${BgrayColour}[${endColour}${yellowColour} Specify a range${endColour}${BpurpleColour} 0-$(jpgCount)${endColour}${BgrayColour} ]${endColour}${grayColour}:${endColour}${BgrayColour}\$${endColour} " && read num1 num2
+    if [ "$num1" == "M" ];then
+      menu
+    fi 
+    for ((i = $num1; i <= $num2; i++));do
+      tput civis
+      num=$(echo $i | awk '{printf "%02d", $1}')
+      file="$folder/wall-$num.jpg"
       wallpaper=$(echo -e $file | sed 's/\// /g' | awk '{print $NF}')
-      echo -e "${greenColour}[+]${endColour}${grayColour} Showing the wallpaper${endColour}${turquoiseColour} -->${endColour}${purpleColour} $wallpaper${endColour}"
+      echo -e "${BgrayColour}[${endColour}${yellowColour} Showing${endColour}${BpurpleColour} $wallpaper${endColour}${BgrayColour} ]${endColour}"
       sleep 0.5
-      kitten icat "$file"
+      kitty icat $file
       tput cnorm
     done
+  done
+}
 
-  elif [ "$option" == "R" ]; then
-    while true; do 
-      echo -e "\n${BgreenColour}[+]${endColour}${grayColour} Type${endColour}${BblueColour} \"M\"${endColour}${grayColour} to return to the menu${endColour}"
-      echo -ne "${yellowColour}[!]${endColour}${grayColour} Specify a range${endColour}${purpleColour} [ 01-$jpg_count ]${endColour}${turquoiseColour} -->${endColour} " && read read1 read2
-      if [ "$read1" == "M" ];then
-        clear
-        break
-      else
-        for ((i = $read1; i <= $read2; i++)); do
-          tput civis
-          num=$(echo $i | awk '{printf "%02d", $1}')
-          file="$folder/wall-$num.jpg"
-          wallpaper=$(echo -e $file | sed 's/\// /g' | awk '{print $NF}')
-          echo -e "\n${greenColour}[+]${endColour}${grayColour} Showing the wallpaper${endColour}${turquoiseColour} -->${endColour}${purpleColour} $wallpaper${endColour}"
-          sleep 0.5
-          kitten icat $file 
-          tput cnorm
-      done
-      fi
-    done
-  fi
-done
-fi
+menu
