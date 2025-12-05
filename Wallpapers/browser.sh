@@ -106,7 +106,7 @@ function specific(){
 function range(){
   while true;do
     echo -e "${greenColour}┌${endColour}${BgrayColour}[${endColour}${yellowColour} type${endColour}${ByellowColour} \"M\"${endColour}${yellowColour} to return to the menu${endColour}${BgrayColour} ]${endColour}"
-    echo -ne "${greenColour}└${endColour}${BgrayColour}[${endColour}${yellowColour} Specify a range${endColour}${BpurpleColour} 0-$(jpgCount)${endColour}${BgrayColour} ]${endColour}${grayColour}:${endColour}${BgrayColour}\$${endColour} " && read num1 num2
+    echo -ne "${greenColour}└${endColour}${BgrayColour}[${endColour}${yellowColour} Specify a range${endColour}${BpurpleColour} 01-$(jpgCount)${endColour}${BgrayColour} ]${endColour}${grayColour}:${endColour}${BgrayColour}\$${endColour} " && read num1 num2
     if [ "$num1" == "M" ];then
       menu
     fi 
